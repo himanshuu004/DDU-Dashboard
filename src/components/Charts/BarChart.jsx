@@ -13,6 +13,11 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', showPercentage = false, percentageData = null, numberData = null }) => {
+  // Check if dark mode is active
+  const isDark = typeof window !== 'undefined' && 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches || 
+     document.documentElement.classList.contains('dark'));
+
   const values = Object.values(data);
   const labels = Object.keys(data);
   const total = showPercentage && percentageData ? Object.values(percentageData).reduce((a, b) => a + b, 0) : values.reduce((a, b) => a + b, 0);
