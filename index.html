@@ -10,18 +10,18 @@
     <title>Uttarakhand Youth Employment Dashboard</title>
     <script>
       // Set theme class before React loads to prevent flash
-      // Default to light mode unless explicitly set to dark
+      // Default to dark mode unless explicitly set to light
       (function() {
         const saved = localStorage.getItem('theme');
         const root = document.documentElement;
-        if (saved === 'dark') {
-          root.classList.add('dark');
-        } else {
-          // Default to light mode - ensure dark class is removed
+        if (saved === 'light') {
           root.classList.remove('dark');
-          // If no preference saved, set it to light
+        } else {
+          // Default to dark mode - ensure dark class is added
+          root.classList.add('dark');
+          // If no preference saved, set it to dark
           if (!saved) {
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('theme', 'dark');
           }
         }
       })();
