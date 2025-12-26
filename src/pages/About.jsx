@@ -43,20 +43,20 @@ const About = () => {
           <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 dark:from-govBlue-400 dark:via-govBlue-300 dark:to-govGreen-400 bg-clip-text text-transparent mb-2 tracking-tight">
             About the Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mt-2">
+          <p className="text-black dark:text-gray-400 text-sm md:text-base mt-2">
             Learn more about the Uttarakhand Youth Employment Dashboard
           </p>
         </div>
         {/* Overview Section */}
         <section className="mb-12">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-8 transition-colors duration-200" data-aos="fade-up">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Overview</h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+            <h2 className="text-2xl font-bold text-black dark:text-gray-200 mb-4">Overview</h2>
+            <p className="text-black dark:text-gray-300 mb-4 leading-relaxed">
               The Uttarakhand Youth Employment Dashboard is a comprehensive data visualization platform designed to 
               provide insights into youth employment trends, employer statistics, and future projections across all 
               13 districts of Uttarakhand.
             </p>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-black dark:text-gray-300 leading-relaxed">
               This dashboard serves as a tool for policymakers, researchers, and stakeholders to understand the 
               employment landscape, identify trends, and make data-driven decisions for youth development initiatives 
               in the state.
@@ -66,7 +66,7 @@ const About = () => {
 
         {/* Features Section */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6" data-aos="fade-up">
+          <h2 className="text-2xl font-bold text-black dark:text-gray-200 mb-6" data-aos="fade-up">
             Key Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -82,8 +82,8 @@ const About = () => {
                   <div className="bg-govBlue-100 dark:bg-govBlue-900/50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-govBlue-600 dark:text-govBlue-400" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">{feature.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
+                  <h3 className="text-lg font-bold text-black dark:text-gray-200 mb-2">{feature.title}</h3>
+                  <p className="text-sm text-black dark:text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -93,11 +93,11 @@ const About = () => {
         {/* Technical Details */}
         <section className="mb-12">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-8 transition-colors duration-200" data-aos="fade-up">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Technical Details</h2>
+            <h2 className="text-2xl font-bold text-black dark:text-gray-200 mb-4">Technical Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Tech Stack</h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <h3 className="text-lg font-semibold text-black dark:text-gray-200 mb-3">Tech Stack</h3>
+                <ul className="space-y-2 text-black dark:text-gray-300">
                   <li className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-govBlue-600 rounded-full"></span>
                     React.js (Vite)
@@ -121,8 +121,8 @@ const About = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Data Management</h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <h3 className="text-lg font-semibold text-black dark:text-gray-200 mb-3">Data Management</h3>
+                <ul className="space-y-2 text-black dark:text-gray-300">
                   <li className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-govGreen-600 rounded-full"></span>
                     Static data files per district
@@ -152,8 +152,8 @@ const About = () => {
         {/* Districts Covered */}
         <section className="mb-12">
           <div className="bg-white rounded-lg shadow-md p-8" data-aos="fade-up">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Districts Covered</h2>
-            <p className="text-gray-700 mb-4">
+            <h2 className="text-2xl font-bold text-black dark:text-gray-200 mb-4">Districts Covered</h2>
+            <p className="text-black dark:text-gray-300 mb-4">
               The dashboard includes data for all 13 districts of Uttarakhand:
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">

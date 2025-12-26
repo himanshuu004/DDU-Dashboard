@@ -105,7 +105,7 @@ const Home = () => {
 
         {/* Key Statistics Cards */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-black dark:text-gray-200 mb-6" data-aos="fade-up">
             Key Statistics
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -139,7 +139,7 @@ const Home = () => {
 
         {/* Charts Section */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-black dark:text-gray-200 mb-6" data-aos="fade-up">
             Overall Analysis
           </h2>
 

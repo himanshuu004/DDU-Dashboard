@@ -27,7 +27,7 @@ const StatCard = ({ title, value, icon: Icon, isHighlighted = false, suffix = ''
         )}
       </div>
       <div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">{title}</p>
+        <p className="text-sm text-black dark:text-gray-400 mb-2 font-medium">{title}</p>
         <p
           className={`text-3xl font-bold ${
             isHighlighted ? 'text-govGreen-700 dark:text-govGreen-400' : 'text-govBlue-700 dark:text-govBlue-400'

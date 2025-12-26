@@ -126,7 +126,7 @@ const Dashboard = () => {
           <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 dark:from-govBlue-400 dark:via-govBlue-300 dark:to-govGreen-400 bg-clip-text text-transparent mb-2 tracking-tight">
             District-wise Insights
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mt-2">
+          <p className="text-black dark:text-gray-400 text-sm md:text-base mt-2">
             Select a district to view detailed statistics and analytics
           </p>
         </div>
@@ -262,7 +262,7 @@ const Dashboard = () => {
                   {predictiveInsights.readinessScore}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">
+              <p className="text-sm text-black dark:text-gray-400 mb-2 font-medium">
                 Estimated Employment Readiness
               </p>
               <p className="text-2xl font-bold text-govBlue-700 dark:text-govBlue-400">
@@ -285,7 +285,7 @@ const Dashboard = () => {
                   {predictiveInsights.alignmentScore}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">
+              <p className="text-sm text-black dark:text-gray-400 mb-2 font-medium">
                 Sector Alignment Level
               </p>
               <p className="text-2xl font-bold text-govGreen-700 dark:text-govGreen-400">
@@ -293,25 +293,25 @@ const Dashboard = () => {
               </p>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6" data-aos="fade-up">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 transition-colors duration-200" data-aos="fade-up">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-lg bg-orange-100 text-orange-600">
+                <div className="p-3 rounded-lg bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400">
                   <AlertCircle size={24} />
                 </div>
                 <span className={`px-3 py-1 text-xs font-semibold rounded ${
                   predictiveInsights.migrationRisk === 'Low'
-                    ? 'bg-govGreen-200 text-govGreen-700'
+                    ? 'bg-govGreen-200 dark:bg-govGreen-900/50 text-govGreen-700 dark:text-govGreen-300'
                     : predictiveInsights.migrationRisk === 'Medium'
-                    ? 'bg-yellow-200 text-yellow-700'
-                    : 'bg-red-200 text-red-700'
+                    ? 'bg-yellow-200 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300'
+                    : 'bg-red-200 dark:bg-red-900/50 text-red-700 dark:text-red-300'
                 }`}>
                   {predictiveInsights.migrationRisk}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 mb-2 font-medium">
+              <p className="text-sm text-black dark:text-gray-400 mb-2 font-medium">
                 Migration Risk Indicator
               </p>
-              <p className="text-2xl font-bold text-orange-700">
+              <p className="text-2xl font-bold text-orange-700 dark:text-orange-400">
                 {predictiveInsights.migrationRisk}
               </p>
             </div>
@@ -327,20 +327,20 @@ const Dashboard = () => {
               color="govBlue"
             />
 
-            <div className="bg-white rounded-lg shadow-md p-6" data-aos="fade-up">
-              <h3 className="text-lg font-bold text-gray-800 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 transition-colors duration-200" data-aos="fade-up">
+              <h3 className="text-lg font-bold text-black dark:text-gray-200 mb-6">
                 Youth Settlement Probability
               </h3>
               <div className="mb-4">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-semibold text-gray-700">
+                  <span className="text-sm font-semibold text-black dark:text-gray-300">
                     Estimated Probability
                   </span>
-                  <span className="text-2xl font-bold text-govBlue-700">
+                  <span className="text-2xl font-bold text-govBlue-700 dark:text-govBlue-400">
                     {predictiveInsights.settlementProbability}%
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-6">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6">
                   <div
                     className={`h-6 rounded-full transition-all duration-1000 flex items-center justify-end pr-2 ${
                       predictiveInsights.settlementProbability >= 60
@@ -361,14 +361,14 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <p className="text-sm font-semibold text-gray-700 mb-2">
+              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <p className="text-sm font-semibold text-black dark:text-gray-300 mb-2">
                   Job Absorption Capacity Indicator
                 </p>
-                <p className="text-3xl font-bold text-govGreen-700">
+                <p className="text-3xl font-bold text-govGreen-700 dark:text-govGreen-400">
                   {predictiveInsights.absorptionCapacity}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-black dark:text-gray-400 mt-1">
                   Jobs per registered youth
                 </p>
               </div>
@@ -376,8 +376,8 @@ const Dashboard = () => {
           </div>
 
           {/* Disclaimer */}
-          <div className="bg-blue-50 border-l-4 border-govBlue-500 p-4 rounded" data-aos="fade-up">
-            <p className="text-sm text-gray-700">
+          <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-govBlue-500 dark:border-govBlue-400 p-4 rounded" data-aos="fade-up">
+            <p className="text-sm text-black dark:text-gray-300">
               <strong>Note:</strong> These insights are indicative and based on available survey data. 
               Projections are calculated using simple mathematical models and should not be considered as 
               definitive predictions.

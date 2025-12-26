@@ -46,7 +46,7 @@ const Navbar = ({ currentPage, onPageChange }) => {
                 className={`relative px-4 py-2 rounded-lg font-medium text-base transition-all duration-300 ${
                   currentPage === item.path
                     ? 'text-govBlue-700 dark:text-govBlue-300 bg-govBlue-50 dark:bg-govBlue-900/30'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-govBlue-600 dark:hover:text-govBlue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                    : 'text-black dark:text-gray-300 hover:text-govBlue-600 dark:hover:text-govBlue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 {item.label}
@@ -60,7 +60,7 @@ const Navbar = ({ currentPage, onPageChange }) => {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="ml-4 p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className="ml-4 p-2 rounded-lg text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -75,7 +75,7 @@ const Navbar = ({ currentPage, onPageChange }) => {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-lg text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -89,7 +89,7 @@ const Navbar = ({ currentPage, onPageChange }) => {
                 const mobileMenu = document.getElementById('mobile-menu');
                 mobileMenu?.classList.toggle('hidden');
               }}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2 rounded-lg text-black dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -111,7 +111,7 @@ const Navbar = ({ currentPage, onPageChange }) => {
                 className={`px-4 py-2 rounded-lg font-medium text-left transition-all duration-300 ${
                   currentPage === item.path
                     ? 'text-govBlue-700 dark:text-govBlue-300 bg-govBlue-50 dark:bg-govBlue-900/30 border-l-4 border-govBlue-600 dark:border-govBlue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-govBlue-600 dark:hover:text-govBlue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                    : 'text-black dark:text-gray-300 hover:text-govBlue-600 dark:hover:text-govBlue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 {item.label}

@@ -139,7 +139,7 @@ const PieChart = ({ title, data, percentageData = null }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 transition-colors duration-200" data-aos="fade-up">
-      <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-6">{title}</h3>
+      <h3 className="text-lg font-bold text-black dark:text-gray-200 mb-6">{title}</h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
         {/* Pie Chart - Left Side */}
         <div className="h-96 lg:h-[400px]">
@@ -159,15 +159,15 @@ const PieChart = ({ title, data, percentageData = null }) => {
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                   style={{ backgroundColor: item.color }}
                 ></div>
-                <span className="font-medium text-gray-800 dark:text-gray-200 text-xs truncate">
+                <span className="font-medium text-black dark:text-gray-200 text-xs truncate">
                   {item.label}
                 </span>
               </div>
               <div className="ml-4">
-                <div className="font-bold text-gray-900 dark:text-gray-100 text-sm">
+                <div className="font-bold text-black dark:text-gray-100 text-sm">
                   {item.value.toLocaleString()}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-black dark:text-gray-400">
                   {item.percentage}%
                 </div>
               </div>
