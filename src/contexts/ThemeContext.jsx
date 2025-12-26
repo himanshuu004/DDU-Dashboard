@@ -12,12 +12,17 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
-    // Check localStorage - default to light mode
+    // Check localStorage - default to dark mode
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
-      return saved === 'dark';
+      // If explicitly set to 'light', use light mode
+      if (saved === 'light') {
+        return false;
+      }
+      // Default to dark mode for 'dark' or any other value (including null)
+      return true;
     }
-    return false;
+    return true; // Default to dark mode
   });
 
   // Sync DOM with state on mount and whenever isDark changes
