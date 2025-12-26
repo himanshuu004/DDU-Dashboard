@@ -23,6 +23,11 @@ ChartJS.register(
 );
 
 const LineChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue' }) => {
+  // Check if dark mode is active
+  const isDark = typeof window !== 'undefined' && 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches || 
+     document.documentElement.classList.contains('dark'));
+
   const chartData = {
     labels: data.labels,
     datasets: [
@@ -100,7 +105,7 @@ const LineChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue' }) =
           display: false,
         },
         ticks: {
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
           font: {
             size: 11,
             weight: '500',
@@ -113,15 +118,15 @@ const LineChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue' }) =
             size: 12,
             weight: 'bold',
           },
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
         },
       },
       y: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
         },
         ticks: {
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
           font: {
             size: 11,
             weight: '500',
@@ -135,7 +140,7 @@ const LineChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue' }) =
             size: 12,
             weight: 'bold',
           },
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
         },
       },
     },

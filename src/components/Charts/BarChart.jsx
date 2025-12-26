@@ -52,7 +52,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           size: 16,
           weight: 'bold',
         },
-        color: window.matchMedia('(prefers-color-scheme: dark)').matches || document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#1f2937',
+        color: window.matchMedia('(prefers-color-scheme: dark)').matches || document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#000000',
         padding: {
           bottom: 20,
         },
@@ -134,7 +134,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           display: false,
         },
         ticks: {
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
           font: {
             size: 11,
             weight: '500',
@@ -149,15 +149,15 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
             size: 12,
             weight: 'bold',
           },
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
         },
       },
       y: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
         },
         ticks: {
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
           font: {
             size: 11,
             weight: '500',
@@ -171,7 +171,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
             size: 12,
             weight: 'bold',
           },
-          color: '#ffffff',
+          color: isDark ? '#ffffff' : '#000000',
         },
       },
     },
