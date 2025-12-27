@@ -8,24 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title>Uttarakhand Youth Employment Dashboard</title>
-    <script>
-      // Set theme class before React loads to prevent flash
-      // Default to dark mode unless explicitly set to light
-      (function() {
-        const saved = localStorage.getItem('theme');
-        const root = document.documentElement;
-        if (saved === 'light') {
-          root.classList.remove('dark');
-        } else {
-          // Default to dark mode - ensure dark class is added
-          root.classList.add('dark');
-          // If no preference saved, set it to dark
-          if (!saved) {
-            localStorage.setItem('theme', 'dark');
-          }
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

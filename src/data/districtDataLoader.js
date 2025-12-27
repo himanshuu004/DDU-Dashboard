@@ -6,10 +6,6 @@ import { districtData as AlmoraData } from './Almora_data';
 import { districtData as BageshwarData } from './Bageshwar_data';
 import { districtData as ChamoliData } from './Chamoli_data';
 import { districtData as ChampawatData } from './Champawat_data';
-import { districtData as DehradunData } from './Dehradun_data';
-import { districtData as HaridwarData } from './Haridwar_data';
-import { districtData as NainitalData } from './Nainital_data';
-import { districtData as PauriGarhwalData } from './Pauri_Garhwal_data';
 import { districtData as PithoragarhData } from './Pithoragarh_data';
 import { districtData as RudraprayagData } from './Rudraprayag_data';
 import { districtData as TehriGarhwalData } from './Tehri_Garhwal_data';
@@ -22,10 +18,6 @@ export const districtDataMap = {
   'Bageshwar': BageshwarData,
   'Chamoli': ChamoliData,
   'Champawat': ChampawatData,
-  'Dehradun': DehradunData,
-  'Haridwar': HaridwarData,
-  'Nainital': NainitalData,
-  'Pauri Garhwal': PauriGarhwalData,
   'Pithoragarh': PithoragarhData,
   'Rudraprayag': RudraprayagData,
   'Tehri Garhwal': TehriGarhwalData,
@@ -184,4 +176,5 @@ export const getEmployerSectorDistributionPercentageData = (data) => {
   
   return result;
 };
+
 

@@ -31,9 +31,17 @@ const Home = () => {
       }
     });
 
-    // Calculate percentages for sectors
+    // Sort sectors by count in descending order
+    const sortedSectors = Object.entries(sectorCounts)
+      .sort((a, b) => b[1] - a[1])
+      .reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {});
+
+    // Calculate percentages for sectors (in sorted order)
     const sectorPercentages = {};
-    Object.entries(sectorCounts).forEach(([sector, count]) => {
+    Object.entries(sortedSectors).forEach(([sector, count]) => {
       sectorPercentages[sector] = ((count / totalYouth) * 100).toFixed(2);
     });
 
@@ -46,6 +54,20 @@ const Home = () => {
     const districtPercentages = {};
     Object.entries(districtYouthCounts).forEach(([district, count]) => {
       districtPercentages[district] = ((count / totalYouth) * 100).toFixed(2);
+    });
+
+    // Prepare district-specific preferred job sectors for tooltip
+    const districtSectors = {};
+    Object.entries(districtDataMap).forEach(([districtName, district]) => {
+      if (district.youth?.preferredJobSector) {
+        // Get top 3 sectors for this district
+        const sectors = Object.entries(district.youth.preferredJobSector)
+          .map(([sector, data]) => ({ sector, count: data.number || 0 }))
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 3)
+          .map(item => item.sector);
+        districtSectors[districtName] = sectors;
+      }
     });
 
     // 5. Preferred Employment Location (Overall)
@@ -78,39 +100,52 @@ const Home = () => {
       educationPercentages[level] = ((count / totalYouth) * 100).toFixed(2);
     });
 
+    // Sort education levels from higher to lower education
+    const educationOrder = ['PG', 'UG', '12th', '11th', '10th', '9th', 'Up to 8th'];
+    const sortedEducationCounts = {};
+    const sortedEducationPercentages = {};
+    
+    educationOrder.forEach(level => {
+      if (educationCounts[level] !== undefined) {
+        sortedEducationCounts[level] = educationCounts[level];
+        sortedEducationPercentages[level] = educationPercentages[level];
+      }
+    });
+
     return {
       totalYouth,
       totalEmployers,
-      sectorCounts,
+      sectorCounts: sortedSectors,
       sectorPercentages,
       districtYouthCounts,
       districtPercentages,
+      districtSectors,
       locationCounts,
       locationPercentages,
-      educationCounts,
-      educationPercentages
+      educationCounts: sortedEducationCounts,
+      educationPercentages: sortedEducationPercentages
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 transition-colors duration-200">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8" data-aos="fade-down">
-          <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 dark:from-govBlue-400 dark:via-govBlue-300 dark:to-govGreen-400 bg-clip-text text-transparent mb-2 tracking-tight">
-            Uttarakhand – Overall Insights
+          <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 bg-clip-text text-transparent mb-2 tracking-tight">
+            Uttarakhand Youth aspiration and incrementsl demand
           </h1>
         </div>
 
         {/* Key Statistics Cards */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-black dark:text-gray-200 mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-black mb-6" data-aos="fade-up">
             Key Statistics
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <StatCard
-              title="Total Youth Registered (Uttarakhand)"
+              title="Surveyed Youth"
               value={overallData.totalYouth}
               icon={UserCheck}
               prefix=""
@@ -133,13 +168,14 @@ const Home = () => {
               title="Youth Distribution by District"
               data={overallData.districtYouthCounts}
               percentageData={overallData.districtPercentages}
+              districtSectors={overallData.districtSectors}
             />
           </div>
         </section>
 
         {/* Charts Section */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-black dark:text-gray-200 mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-black mb-6" data-aos="fade-up">
             Overall Analysis
           </h2>
 

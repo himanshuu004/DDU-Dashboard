@@ -4,15 +4,11 @@ export const districts = [
   'Bageshwar',
   'Chamoli',
   'Champawat',
-  'Dehradun',
-  'Haridwar',
-  'Nainital',
-  'Pauri Garhwal',
   'Pithoragarh',
   'Rudraprayag',
   'Tehri Garhwal',
-  'Udham Singh Nagar',
-  'Uttarkashi'
+  'Uttarkashi',
+  'Udham Singh Nagar'
 ];
 
 // Helper function to get district file name
@@ -24,4 +20,5 @@ export const getDistrictFileName = (districtName) => {
   };
   return nameMap[districtName] || districtName.replace(/\s+/g, '_') + '_data';
 };
+
 

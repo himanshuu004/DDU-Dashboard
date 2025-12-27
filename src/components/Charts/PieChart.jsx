@@ -9,7 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-const PieChart = ({ title, data, percentageData = null }) => {
+const PieChart = ({ title, data, percentageData = null, districtSectors = null }) => {
   const colors = [
     'rgba(0, 121, 230, 0.8)',
     'rgba(0, 154, 85, 0.8)',
@@ -51,26 +51,12 @@ const PieChart = ({ title, data, percentageData = null }) => {
   // Calculate total for percentages
   const total = Object.values(data).reduce((a, b) => a + b, 0);
 
-  // Prepare data list for right side
-  const dataList = Object.entries(data).map(([label, value], index) => {
-    const percentage = percentageData && percentageData[label]
-      ? percentageData[label]
-      : ((value / total) * 100).toFixed(1);
-    return {
-      label,
-      value,
-      percentage: parseFloat(percentage),
-      color: colors[index % colors.length],
-      borderColor: borderColors[index % borderColors.length]
-    };
-  });
-
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // Hide legend since we show data on right
+        display: false,
       },
       datalabels: {
         display: true,
@@ -81,19 +67,21 @@ const PieChart = ({ title, data, percentageData = null }) => {
             ? percentageData[label]
             : ((value / total) * 100).toFixed(1);
           
-          // Show number and percentage on chart if segment is large enough
-          if ((value / total) * 100 > 5) {
-            return `${value}\n${percentage}%`;
+          // Show location name and percentage on chart if segment is large enough
+          // Lower threshold to show more labels
+          if ((value / total) * 100 > 1) {
+            return `${label}\n${percentage}%`;
           }
           return '';
         },
         font: {
-          size: 12,
+          size: 13,
           weight: 'bold',
         },
-        color: '#fff',
-        textStrokeColor: '#000',
+        color: '#ffffff',
+        textStrokeColor: '#000000',
         textStrokeWidth: 2,
+        padding: 4,
       },
       title: {
         display: true,
@@ -102,24 +90,53 @@ const PieChart = ({ title, data, percentageData = null }) => {
           size: 18,
           weight: 'bold',
         },
-        color: window.matchMedia('(prefers-color-scheme: dark)').matches || document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#1f2937',
+        color: '#000000',
         padding: {
           bottom: 20,
         },
       },
       tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        padding: 12,
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        padding: 16,
         titleFont: {
-          size: 14,
+          size: 16,
           weight: 'bold',
         },
         bodyFont: {
           size: 13,
         },
-        cornerRadius: 6,
+        cornerRadius: 8,
+        borderColor: 'rgba(0, 121, 230, 0.3)',
+        borderWidth: 2,
+        displayColors: false,
+        titleColor: '#1f2937',
+        bodyColor: '#374151',
         callbacks: {
+          title: function (context) {
+            const label = context[0].label || '';
+            const value = context[0].parsed || 0;
+            const total = context[0].dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = percentageData && percentageData[label]
+              ? percentageData[label]
+              : ((value / total) * 100).toFixed(1);
+            return `${label} - ${percentage}%`;
+          },
           label: function (context) {
+            // If districtSectors is provided, show top 3 sectors
+            if (districtSectors) {
+              const districtName = context.label || '';
+              const sectors = districtSectors[districtName] || [];
+              
+              if (sectors.length > 0) {
+                return [
+                  'Top Preferred Job Sectors:',
+                  ...sectors.map((sector, index) => `  ${index + 1}. ${sector}`)
+                ];
+              }
+              return 'No sector data available';
+            }
+            
+            // Default behavior for other pie charts
             const label = context.label || '';
             const value = context.parsed || 0;
             const total = context.dataset.data.reduce((a, b) => a + b, 0);
@@ -138,41 +155,12 @@ const PieChart = ({ title, data, percentageData = null }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 transition-colors duration-200" data-aos="fade-up">
-      <h3 className="text-lg font-bold text-black dark:text-gray-200 mb-6">{title}</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-        {/* Pie Chart - Left Side */}
-        <div className="h-96 lg:h-[400px]">
+    <div className="bg-white rounded-lg shadow-md p-6" data-aos="fade-up">
+      <h3 className="text-lg font-bold text-black mb-6">{title}</h3>
+      <div className="flex justify-center items-center">
+        {/* Pie Chart - Centered and Larger */}
+        <div className="h-[500px] w-full max-w-2xl">
           <Pie data={chartData} options={options} />
-        </div>
-
-        {/* Data List - Right Side */}
-        <div className="grid grid-cols-2 gap-2">
-          {dataList.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-l-4"
-              style={{ borderLeftColor: item.color }}
-            >
-              <div className="flex items-center gap-1.5 mb-1">
-                <div
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: item.color }}
-                ></div>
-                <span className="font-medium text-black dark:text-gray-200 text-xs truncate">
-                  {item.label}
-                </span>
-              </div>
-              <div className="ml-4">
-                <div className="font-bold text-black dark:text-gray-100 text-sm">
-                  {item.value.toLocaleString()}
-                </div>
-                <div className="text-xs text-black dark:text-gray-400">
-                  {item.percentage}%
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

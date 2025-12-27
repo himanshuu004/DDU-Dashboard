@@ -13,10 +13,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', showPercentage = false, percentageData = null, numberData = null }) => {
-  // Check if dark mode is active
-  const isDark = typeof window !== 'undefined' && 
-    (window.matchMedia('(prefers-color-scheme: dark)').matches || 
-     document.documentElement.classList.contains('dark'));
 
   const values = Object.values(data);
   const labels = Object.keys(data);
@@ -57,7 +53,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           size: 16,
           weight: 'bold',
         },
-        color: window.matchMedia('(prefers-color-scheme: dark)').matches || document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#000000',
+        color: '#000000',
         padding: {
           bottom: 20,
         },
@@ -91,27 +87,17 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
         align: 'top',
         formatter: function(value, context) {
           const label = context.chart.data.labels[context.dataIndex];
-          let displayText = value.toString();
+          let displayText = '';
           
-          // If we have percentage data, show both number and percentage
+          // Always show only percentage
           if (showPercentage && percentageData && percentageData[label]) {
             const percentage = percentageData[label];
-            displayText = `${value} (${percentage}%)`;
+            displayText = `${percentage}%`;
           } 
-          // If we have number data (for cases where value is percentage but we want to show number)
-          else if (numberData && numberData[label]) {
-            const number = numberData[label];
-            const percentage = ((value / total) * 100).toFixed(1);
-            displayText = `${number} (${percentage}%)`;
-          }
-          // If showing percentages on Y-axis, calculate percentage
-          else if (showPercentage) {
+          // Calculate percentage from value
+          else {
             const percentage = ((value / total) * 100).toFixed(1);
             displayText = `${percentage}%`;
-          }
-          // Default: show the number
-          else {
-            displayText = value.toString();
           }
           
           return displayText;
@@ -139,10 +125,10 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           display: false,
         },
         ticks: {
-          color: isDark ? '#ffffff' : '#000000',
+          color: '#000000',
           font: {
-            size: 11,
-            weight: '500',
+            size: 12,
+            weight: 'bold',
           },
           maxRotation: 45,
           minRotation: 0,
@@ -151,21 +137,22 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           display: true,
           text: xAxisLabel || 'Category',
           font: {
-            size: 12,
+            size: 14,
             weight: 'bold',
           },
-          color: isDark ? '#ffffff' : '#000000',
+          color: '#000000',
         },
       },
       y: {
         grid: {
-          color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+          color: 'rgba(0, 0, 0, 0.1)',
+          lineWidth: 1,
         },
         ticks: {
-          color: isDark ? '#ffffff' : '#000000',
+          color: '#000000',
           font: {
-            size: 11,
-            weight: '500',
+            size: 12,
+            weight: 'bold',
           },
           beginAtZero: true,
         },
@@ -173,10 +160,10 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           display: true,
           text: yAxisLabel || 'Count',
           font: {
-            size: 12,
+            size: 14,
             weight: 'bold',
           },
-          color: isDark ? '#ffffff' : '#000000',
+          color: '#000000',
         },
       },
     },
@@ -187,7 +174,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 h-80 transition-colors duration-200" data-aos="fade-up">
+    <div className="bg-white rounded-lg shadow-md p-6 h-80" data-aos="fade-up">
       <Bar data={chartData} options={options} />
     </div>
   );
