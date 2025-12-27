@@ -10,10 +10,14 @@
     <title>Uttarakhand Youth Employment Dashboard</title>
     <script>
       // Prevent flicker on page load by applying theme immediately
+      // Default to light theme if no preference is saved
       (function() {
         const theme = localStorage.getItem('theme');
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
+        } else {
+          // Ensure light theme (no dark class) - this is the default
+          document.documentElement.classList.remove('dark');
         }
       })();
     </script>
