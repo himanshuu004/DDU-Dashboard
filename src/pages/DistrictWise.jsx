@@ -13,8 +13,8 @@ import {
   getEducationLevelData,
   getEducationLevelNumberData,
   getEducationLevelPercentageData,
-  getVillageWiseData,
-  getVillageWisePercentageData,
+  getBlockWiseData,
+  getBlockWisePercentageData,
   getPreferredJobSectorData,
   getPreferredJobSectorPercentageData,
   getPreferredEmploymentLocationData,
@@ -36,8 +36,8 @@ const Dashboard = () => {
   const educationNumberData = useMemo(() => getEducationLevelNumberData(currentDistrictData), [currentDistrictData]);
   const educationPercentageData = useMemo(() => getEducationLevelPercentageData(currentDistrictData), [currentDistrictData]);
   
-  const villageData = useMemo(() => getVillageWiseData(currentDistrictData), [currentDistrictData]);
-  const villagePercentageData = useMemo(() => getVillageWisePercentageData(currentDistrictData), [currentDistrictData]);
+  const blockData = useMemo(() => getBlockWiseData(currentDistrictData), [currentDistrictData]);
+  const blockPercentageData = useMemo(() => getBlockWisePercentageData(currentDistrictData), [currentDistrictData]);
   
   const preferredSectorData = useMemo(() => getPreferredJobSectorData(currentDistrictData), [currentDistrictData]);
   const preferredSectorPercentageData = useMemo(() => getPreferredJobSectorPercentageData(currentDistrictData), [currentDistrictData]);
@@ -49,22 +49,22 @@ const Dashboard = () => {
   const employerSectorPercentageData = useMemo(() => getEmployerSectorDistributionPercentageData(currentDistrictData), [currentDistrictData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 ">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8" data-aos="fade-down">
-          <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 bg-clip-text text-transparent mb-2 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-[#7053bc] dark:text-purple-400 mb-2 tracking-tight">
             District-wise Insights
           </h1>
-          <p className="text-black text-sm md:text-base mt-2">
+          <p className="text-black dark:text-gray-300 text-sm md:text-base mt-2">
             Select a district to view detailed statistics and analytics
           </p>
         </div>
         {/* District Selection and Surveyed Youth - Side by Side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* District Selection */}
-          <div className="bg-white rounded-lg shadow-lg p-6" data-aos="fade-down">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-300" data-aos="fade-down">
             <DistrictSelect
               districts={districts}
               selectedDistrict={selectedDistrict}
@@ -86,7 +86,7 @@ const Dashboard = () => {
 
         {/* Youth Statistics Section */}
         <section className="mb-12">
-          <div className="bg-gradient-to-r from-govBlue-600 to-govBlue-700 text-white px-6 py-4 rounded-lg shadow-md mb-6" data-aos="fade-up">
+          <div className="bg-[#7053bc] dark:bg-purple-700 text-white px-6 py-4 rounded-lg shadow-md mb-6 transition-colors duration-300" data-aos="fade-up">
             <h2 className="text-xl md:text-2xl font-bold">
               Youth Statistics
             </h2>
@@ -106,12 +106,12 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Village-wise Pie Chart */}
+          {/* Block-wise Pie Chart */}
           <div className="mb-8">
             <PieChart
-              title="Village-wise Youth Distribution"
-              data={villageData}
-              percentageData={villagePercentageData}
+              title="Block-wise Youth Distribution"
+              data={blockData}
+              percentageData={blockPercentageData}
             />
           </div>
 
@@ -140,7 +140,7 @@ const Dashboard = () => {
 
         {/* Employer Statistics Section */}
         <section className="mb-12">
-          <div className="bg-gradient-to-r from-govGreen-600 to-govGreen-700 text-white px-6 py-4 rounded-lg shadow-md mb-6" data-aos="fade-up">
+          <div className="bg-[#7053bc] dark:bg-purple-700 text-white px-6 py-4 rounded-lg shadow-md mb-6 transition-colors duration-300" data-aos="fade-up">
             <h2 className="text-xl md:text-2xl font-bold">
               Employer Statistics
             </h2>

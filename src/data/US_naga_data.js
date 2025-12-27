@@ -14,33 +14,33 @@ export const usNagarData = {
       '9th': { number: 2, percentage: 0.91 }
     },
     
-    villageWise: {
-      'Gadarpur': { number: 26, percentage: 11.82 },
-      'Gularbhoj': { number: 11, percentage: 5.00 },
-      'Barhaini': { number: 10, percentage: 4.55 },
-      'Bazpur Gaon': { number: 8, percentage: 3.64 },
-      'Naugwathaggu': { number: 8, percentage: 3.64 },
-      // Others will be calculated
+    blockWise: {
+      'Gadarpur': { number: Math.round(220 * 0.1682), percentage: 16.82 },
+      'Bazpur': { number: Math.round(220 * 0.1591), percentage: 15.91 },
+      'Khatima': { number: Math.round(220 * 0.1591), percentage: 15.91 },
+      'Sitarganj': { number: Math.round(220 * 0.1591), percentage: 15.91 },
+      'Kashipur': { number: Math.round(220 * 0.1500), percentage: 15.00 },
+      'Rudrapur': { number: Math.round(220 * 0.1091), percentage: 10.91 },
+      'Jaspur': { number: Math.round(220 * 0.0955), percentage: 9.55 }
     },
     
     preferredJobSector: {
-      'BFSI': { number: 86, percentage: 39.09 },
-      'Beauty & Wellness': { number: 67, percentage: 30.45 },
-      'Agriculture': { number: 60, percentage: 27.27 },
-      'Healthcare': { number: 56, percentage: 25.45 },
-      'Electronics': { number: 43, percentage: 19.55 }
+      'Apparel': { number: 59, percentage: 27.00 },
+      'Beauty & Wellness': { number: 29, percentage: 13.00 },
+      'Healthcare': { number: 26, percentage: 12.00 },
+      'Agriculture': { number: 20, percentage: 9.00 }
     },
     
     preferredEmploymentLocation: {
-      'Within Domicile District': { number: 134, percentage: 60.91 },
-      'Within Domicile State': { number: 48, percentage: 21.82 }
+      'Within Domicile District': { number: Math.round(220 * 0.7227), percentage: 72.27 },
+      'Within Domicile State': { number: Math.round(220 * 0.2727), percentage: 27.27 }
     }
   },
   
   // Employer Statistics
   employer: {
     totalEmployerOrganizations: 254,
-    expectedNewJobs: 320, // Estimated based on employer organizations
+    expectedNewJobs: 320,
     
     sectorDistribution: {
       'Auto': { number: 18, percentage: 7.09 },
@@ -91,22 +91,22 @@ export const getEducationLevelPercentageData = () => {
   return result;
 };
 
-export const getVillageWiseData = () => {
-  const data = usNagarData.youth.villageWise;
+export const getBlockWiseData = () => {
+  const data = usNagarData.youth.blockWise;
   const top5 = {};
   let othersCount = 0;
   let othersPercentage = 0;
   
-  // Get top 5 villages
+  // Get top 5 blocks
   const sorted = Object.entries(data)
     .sort((a, b) => b[1].number - a[1].number)
     .slice(0, 5);
   
-  sorted.forEach(([village, stats]) => {
-    top5[village] = stats.number;
+  sorted.forEach(([block, stats]) => {
+    top5[block] = stats.number;
   });
   
-  // Calculate others (remaining villages)
+  // Calculate others (remaining blocks)
   const totalFromTop5 = sorted.reduce((sum, [, stats]) => sum + stats.number, 0);
   othersCount = usNagarData.youth.totalRegisteredYouth - totalFromTop5;
   othersPercentage = ((othersCount / usNagarData.youth.totalRegisteredYouth) * 100).toFixed(2);
@@ -118,15 +118,15 @@ export const getVillageWiseData = () => {
   return top5;
 };
 
-export const getVillageWisePercentageData = () => {
-  const data = usNagarData.youth.villageWise;
+export const getBlockWisePercentageData = () => {
+  const data = usNagarData.youth.blockWise;
   const result = {};
   const sorted = Object.entries(data)
     .sort((a, b) => b[1].number - a[1].number)
     .slice(0, 5);
   
-  sorted.forEach(([village, stats]) => {
-    result[village] = stats.percentage;
+  sorted.forEach(([block, stats]) => {
+    result[block] = stats.percentage;
   });
   
   // Calculate others percentage
@@ -221,4 +221,3 @@ export const getEmployerSectorDistributionPercentageData = () => {
   
   return result;
 };
-

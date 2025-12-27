@@ -1,39 +1,44 @@
-// Static data for Almora district (Dummy values - to be updated)
+// Static data for Almora district
 export const districtData = {
   youth: {
-    totalRegisteredYouth: 150, // Dummy value
+    totalRegisteredYouth: 376,
     educationLevel: {
-      '12th': { number: 50, percentage: 33.33 },
-      'UG': { number: 40, percentage: 26.67 },
-      'PG': { number: 30, percentage: 20.00 },
-      '10th': { number: 20, percentage: 13.33 },
-      '11th': { number: 5, percentage: 3.33 },
-      'Up to 8th': { number: 3, percentage: 2.00 },
-      '9th': { number: 2, percentage: 1.33 }
+      '12th': { number: Math.round(376 * 0.5762), percentage: 57.62 },
+      'UG': { number: Math.round(376 * 0.1468), percentage: 14.68 },
+      '10th': { number: Math.round(376 * 0.1385), percentage: 13.85 },
+      'Up to 8th': { number: Math.round(376 * 0.0831), percentage: 8.31 },
+      'PG': { number: Math.round(376 * 0.0471), percentage: 4.71 },
+      '9th': { number: Math.round(376 * 0.0083), percentage: 0.83 }
     },
-    villageWise: {
-      'Village A': { number: 25, percentage: 16.67 },
-      'Village B': { number: 20, percentage: 13.33 },
-      'Village C': { number: 18, percentage: 12.00 },
-      'Village D': { number: 15, percentage: 10.00 },
-      'Village E': { number: 12, percentage: 8.00 }
+    blockWise: {
+      'Dwarahat': { number: Math.round(376 * 0.3029), percentage: 30.29 },
+      'Sult': { number: Math.round(376 * 0.1099), percentage: 10.99 },
+      'Hawalbag': { number: Math.round(376 * 0.0992), percentage: 9.92 },
+      'Dhauladevi': { number: Math.round(376 * 0.0912), percentage: 9.12 },
+      'Bhaisiyachana': { number: Math.round(376 * 0.0697), percentage: 6.97 },
+      'Tarikhet': { number: Math.round(376 * 0.0697), percentage: 6.97 },
+      'Chaukhutia': { number: Math.round(376 * 0.0670), percentage: 6.70 },
+      'Takula': { number: Math.round(376 * 0.0670), percentage: 6.70 },
+      'Lamgara': { number: Math.round(376 * 0.0617), percentage: 6.17 },
+      'Bhikiyasain': { number: Math.round(376 * 0.0322), percentage: 3.22 },
+      'Syaldey': { number: Math.round(376 * 0.0295), percentage: 2.95 }
     },
     preferredJobSector: {
-      'Government Jobs': { number: 60, percentage: 40.00 },
-      'Tourism': { number: 40, percentage: 26.67 },
-      'Agriculture': { number: 30, percentage: 20.00 },
-      'Education': { number: 15, percentage: 10.00 },
-      'Healthcare': { number: 5, percentage: 3.33 }
+      'Apparel': { number: 117, percentage: 31.12 },
+      'Beauty & Wellness': { number: 54, percentage: 14.43 },
+      'Agriculture': { number: 26, percentage: 6.90 },
+      'BFSI': { number: 8, percentage: 2.01 },
+      'Automotive': { number: 3, percentage: 0.75 }
     },
     preferredEmploymentLocation: {
-      'Within Domicile District': { number: 90, percentage: 60.00 },
-      'Within Domicile State': { number: 50, percentage: 33.33 },
-      'Outside State': { number: 10, percentage: 6.67 }
+      'Within Domicile District': { number: Math.round(376 * 0.7346), percentage: 73.46 },
+      'Within Domicile State': { number: Math.round(376 * 0.2440), percentage: 24.40 },
+      'Outside State': { number: Math.round(376 * 0.0214), percentage: 2.14 }
     }
   },
   employer: {
-    totalEmployerOrganizations: 120, // Dummy value
-    expectedNewJobs: 180, // Dummy value
+    totalEmployerOrganizations: 120,
+    expectedNewJobs: 150,
     sectorDistribution: {
       'Tourism': { number: 30, percentage: 25.00 },
       'Agriculture': { number: 25, percentage: 20.83 },
@@ -46,5 +51,3 @@ export const districtData = {
     }
   }
 };
-
-

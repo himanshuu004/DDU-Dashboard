@@ -3,10 +3,10 @@ import CountUp from 'react-countup';
 const StatCard = ({ title, value, icon: Icon, isHighlighted = false, suffix = '', prefix = '' }) => {
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg ${
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg ${
         isHighlighted
-          ? 'border-2 border-govGreen-500 bg-gradient-to-br from-govGreen-50 to-govBlue-50'
-          : 'border border-gray-200'
+          ? 'border-2 border-govGreen-500 dark:border-govGreen-400 bg-gradient-to-br from-govGreen-50 to-govBlue-50 dark:from-gray-700 dark:to-gray-800'
+          : 'border border-gray-200 dark:border-gray-700'
       }`}
       data-aos="fade-up"
     >
@@ -15,7 +15,7 @@ const StatCard = ({ title, value, icon: Icon, isHighlighted = false, suffix = ''
           className={`p-3 rounded-lg ${
             isHighlighted
               ? 'bg-govGreen-500 text-white'
-              : 'bg-govBlue-100 text-govBlue-600'
+              : 'bg-[#7053bc] text-white'
           }`}
         >
           <Icon size={24} />
@@ -27,10 +27,10 @@ const StatCard = ({ title, value, icon: Icon, isHighlighted = false, suffix = ''
         )}
       </div>
       <div>
-        <p className="text-sm text-black mb-2 font-medium">{title}</p>
+        <p className="text-sm text-black dark:text-gray-300 mb-2 font-medium">{title}</p>
         <p
           className={`text-3xl font-bold ${
-            isHighlighted ? 'text-govGreen-700' : 'text-govBlue-700'
+            isHighlighted ? 'text-govGreen-700 dark:text-govGreen-400' : 'text-[#7053bc] dark:text-purple-400'
           }`}
         >
           <CountUp

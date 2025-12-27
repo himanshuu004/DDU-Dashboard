@@ -1,47 +1,40 @@
-// Static data for Bageshwar district (Dummy values - to be updated)
+// Static data for Bageshwar district
 export const districtData = {
   youth: {
-    totalRegisteredYouth: 80, // Dummy value
+    totalRegisteredYouth: 130,
     educationLevel: {
-      '12th': { number: 30, percentage: 37.50 },
-      'UG': { number: 20, percentage: 25.00 },
-      'PG': { number: 15, percentage: 18.75 },
-      '10th': { number: 10, percentage: 12.50 },
-      '11th': { number: 3, percentage: 3.75 },
-      'Up to 8th': { number: 2, percentage: 2.50 }
+      '12th': { number: Math.round(130 * 0.7287), percentage: 72.87 },
+      'UG': { number: Math.round(130 * 0.2248), percentage: 22.48 },
+      '10th': { number: Math.round(130 * 0.0233), percentage: 2.33 },
+      'PG': { number: Math.round(130 * 0.0233), percentage: 2.33 }
     },
-    villageWise: {
-      'Village A': { number: 15, percentage: 18.75 },
-      'Village B': { number: 12, percentage: 15.00 },
-      'Village C': { number: 10, percentage: 12.50 },
-      'Village D': { number: 8, percentage: 10.00 },
-      'Village E': { number: 6, percentage: 7.50 }
+    blockWise: {
+      'Bageshwar': { number: Math.round(130 * 0.3953), percentage: 39.53 },
+      'Garur': { number: Math.round(130 * 0.3876), percentage: 38.76 },
+      'Kapkote': { number: Math.round(130 * 0.2171), percentage: 21.71 }
     },
     preferredJobSector: {
-      'Government Jobs': { number: 35, percentage: 43.75 },
-      'Agriculture': { number: 20, percentage: 25.00 },
-      'Tourism': { number: 15, percentage: 18.75 },
-      'Education': { number: 7, percentage: 8.75 },
-      'Healthcare': { number: 3, percentage: 3.75 }
+      'Apparel': { number: 39, percentage: 30.00 },
+      'Beauty & Wellness': { number: 20, percentage: 15.00 },
+      'Agriculture': { number: 10, percentage: 7.50 }
     },
     preferredEmploymentLocation: {
-      'Within Domicile District': { number: 50, percentage: 62.50 },
-      'Within Domicile State': { number: 25, percentage: 31.25 },
-      'Outside State': { number: 5, percentage: 6.25 }
+      'Within Domicile State': { number: Math.round(130 * 0.5969), percentage: 59.69 },
+      'Within Domicile District': { number: Math.round(130 * 0.4031), percentage: 40.31 }
     }
   },
   employer: {
-    totalEmployerOrganizations: 60, // Dummy value
-    expectedNewJobs: 100, // Dummy value
+    totalEmployerOrganizations: 60,
+    expectedNewJobs: 80,
     sectorDistribution: {
-      'Agriculture': { number: 20, percentage: 33.33 },
       'Tourism': { number: 15, percentage: 25.00 },
-      'Education': { number: 10, percentage: 16.67 },
-      'Retail': { number: 8, percentage: 13.33 },
-      'Healthcare': { number: 5, percentage: 8.33 },
-      'Government': { number: 2, percentage: 3.33 }
+      'Agriculture': { number: 12, percentage: 20.00 },
+      'Healthcare': { number: 9, percentage: 15.00 },
+      'Retail': { number: 7, percentage: 11.67 },
+      'Education': { number: 6, percentage: 10.00 },
+      'Manufacturing': { number: 5, percentage: 8.33 },
+      'Government': { number: 3, percentage: 5.00 },
+      'IT': { number: 3, percentage: 5.00 }
     }
   }
 };
-
-

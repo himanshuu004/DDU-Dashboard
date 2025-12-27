@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +14,20 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', showPercentage = false, percentageData = null, numberData = null }) => {
+  // Check if dark mode is active
+  const isDark = document.documentElement.classList.contains('dark');
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  // Detect large screen (>= 1024px)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const values = Object.values(data);
   const labels = Object.keys(data);
@@ -24,14 +39,8 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
       {
         label: yAxisLabel || 'Count',
         data: values,
-        backgroundColor:
-          color === 'govBlue'
-            ? 'rgba(0, 121, 230, 0.7)'
-            : 'rgba(0, 154, 85, 0.7)',
-        borderColor:
-          color === 'govBlue'
-            ? 'rgba(0, 121, 230, 1)'
-            : 'rgba(0, 154, 85, 1)',
+        backgroundColor: 'rgba(112, 83, 188, 0.7)', // #7053bc with opacity
+        borderColor: 'rgba(112, 83, 188, 1)', // #7053bc
         borderWidth: 2,
         borderRadius: 6,
         borderSkipped: false,
@@ -53,7 +62,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           size: 16,
           weight: 'bold',
         },
-        color: '#000000',
+        color: isDark ? '#a78bfa' : '#7053bc',
         padding: {
           bottom: 20,
         },
@@ -82,41 +91,52 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
         }
       },
       datalabels: {
-        display: true,
+        display: isLargeScreen,
         anchor: 'end',
         align: 'top',
         formatter: function(value, context) {
           const label = context.chart.data.labels[context.dataIndex];
-          let displayText = '';
           
-          // Always show only percentage
-          if (showPercentage && percentageData && percentageData[label]) {
-            const percentage = percentageData[label];
-            displayText = `${percentage}%`;
-          } 
-          // Calculate percentage from value
-          else {
-            const percentage = ((value / total) * 100).toFixed(1);
-            displayText = `${percentage}%`;
+          // For large screens, show category name and value
+          if (isLargeScreen) {
+            let displayText = `${label}\n${value.toLocaleString()}`;
+            
+            // Add percentage if available
+            if (showPercentage && percentageData && percentageData[label]) {
+              const percentage = percentageData[label];
+              displayText += `\n${percentage}%`;
+            } else if (showPercentage) {
+              const percentage = ((value / total) * 100).toFixed(1);
+              displayText += `\n${percentage}%`;
+            }
+            
+            return displayText;
           }
           
-          return displayText;
+          // For smaller screens, show only percentage
+          if (showPercentage && percentageData && percentageData[label]) {
+            const percentage = percentageData[label];
+            return `${percentage}%`;
+          } 
+          const percentage = ((value / total) * 100).toFixed(1);
+          return `${percentage}%`;
         },
         font: {
-          size: 12,
+          size: 11,
           weight: 'bold',
         },
         color: '#ffffff',
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        borderRadius: 4,
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        borderRadius: 6,
         padding: {
-          top: 4,
-          bottom: 4,
-          left: 6,
-          right: 6
+          top: 6,
+          bottom: 6,
+          left: 8,
+          right: 8
         },
         textStrokeColor: '#000000',
         textStrokeWidth: 1,
+        textAlign: 'center',
       },
     },
     scales: {
@@ -125,7 +145,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
           display: false,
         },
         ticks: {
-          color: '#000000',
+          color: '#ffffff',
           font: {
             size: 12,
             weight: 'bold',
@@ -140,16 +160,16 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
             size: 14,
             weight: 'bold',
           },
-          color: '#000000',
+          color: '#ffffff',
         },
       },
       y: {
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)',
+          color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
           lineWidth: 1,
         },
         ticks: {
-          color: '#000000',
+          color: isDark ? '#e5e7eb' : '#000000',
           font: {
             size: 12,
             weight: 'bold',
@@ -163,7 +183,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
             size: 14,
             weight: 'bold',
           },
-          color: '#000000',
+          color: isDark ? '#ffffff' : '#000000',
         },
       },
     },
@@ -174,7 +194,7 @@ const BarChart = ({ title, data, xAxisLabel, yAxisLabel, color = 'govBlue', show
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 h-80" data-aos="fade-up">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 h-80 transition-colors duration-300" data-aos="fade-up">
       <Bar data={chartData} options={options} />
     </div>
   );

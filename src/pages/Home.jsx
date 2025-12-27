@@ -39,10 +39,10 @@ const Home = () => {
         return obj;
       }, {});
 
-    // Calculate percentages for sectors (in sorted order)
+    // Calculate percentages for sectors based on total youth (recalculated)
     const sectorPercentages = {};
     Object.entries(sortedSectors).forEach(([sector, count]) => {
-      sectorPercentages[sector] = ((count / totalYouth) * 100).toFixed(2);
+      sectorPercentages[sector] = parseFloat(((count / totalYouth) * 100).toFixed(2));
     });
 
     // 4. Youth Distribution by District
@@ -51,26 +51,34 @@ const Home = () => {
       districtYouthCounts[districtName] = district.youth?.totalRegisteredYouth || 0;
     });
 
+    // Recalculate district percentages based on total youth
     const districtPercentages = {};
     Object.entries(districtYouthCounts).forEach(([district, count]) => {
-      districtPercentages[district] = ((count / totalYouth) * 100).toFixed(2);
+      districtPercentages[district] = parseFloat(((count / totalYouth) * 100).toFixed(2));
     });
 
-    // Prepare district-specific preferred job sectors for tooltip
+    // Prepare district-specific preferred job sectors with percentages for tooltip
     const districtSectors = {};
     Object.entries(districtDataMap).forEach(([districtName, district]) => {
       if (district.youth?.preferredJobSector) {
-        // Get top 3 sectors for this district
+        // Get top 3 sectors with their percentages for this district
         const sectors = Object.entries(district.youth.preferredJobSector)
-          .map(([sector, data]) => ({ sector, count: data.number || 0 }))
+          .map(([sector, data]) => ({ 
+            sector, 
+            count: data.number || 0,
+            percentage: data.percentage || 0
+          }))
           .sort((a, b) => b.count - a.count)
           .slice(0, 3)
-          .map(item => item.sector);
+          .map(item => ({ 
+            sector: item.sector, 
+            percentage: parseFloat(item.percentage).toFixed(1) 
+          }));
         districtSectors[districtName] = sectors;
       }
     });
 
-    // 5. Preferred Employment Location (Overall)
+    // 5. Preferred Employment Location (Overall) - Recalculate from aggregated counts
     const locationCounts = {};
     Object.values(districtDataMap).forEach(district => {
       if (district.youth?.preferredEmploymentLocation) {
@@ -80,12 +88,14 @@ const Home = () => {
       }
     });
 
+    // Recalculate location percentages based on total youth
+    const totalLocationCount = Object.values(locationCounts).reduce((sum, count) => sum + count, 0);
     const locationPercentages = {};
     Object.entries(locationCounts).forEach(([location, count]) => {
-      locationPercentages[location] = ((count / totalYouth) * 100).toFixed(2);
+      locationPercentages[location] = parseFloat(((count / totalLocationCount) * 100).toFixed(2));
     });
 
-    // 6. Overall Minimum Education Distribution
+    // 6. Overall Minimum Education Distribution - Recalculate from aggregated counts
     const educationCounts = {};
     Object.values(districtDataMap).forEach(district => {
       if (district.youth?.educationLevel) {
@@ -95,13 +105,15 @@ const Home = () => {
       }
     });
 
+    // Recalculate education percentages based on total youth
+    const totalEducationCount = Object.values(educationCounts).reduce((sum, count) => sum + count, 0);
     const educationPercentages = {};
     Object.entries(educationCounts).forEach(([level, count]) => {
-      educationPercentages[level] = ((count / totalYouth) * 100).toFixed(2);
+      educationPercentages[level] = parseFloat(((count / totalEducationCount) * 100).toFixed(2));
     });
 
     // Sort education levels from higher to lower education
-    const educationOrder = ['PG', 'UG', '12th', '11th', '10th', '9th', 'Up to 8th'];
+    const educationOrder = ['PG', 'UG', '12th', '11th', '10th', '9th', 'Up to 8th', 'Other'];
     const sortedEducationCounts = {};
     const sortedEducationPercentages = {};
     
@@ -128,19 +140,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8" data-aos="fade-down">
-          <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-govBlue-700 via-govBlue-600 to-govGreen-600 bg-clip-text text-transparent mb-2 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-[#7053bc] mb-2 tracking-tight">
             Uttarakhand Youth aspiration and incrementsl demand
           </h1>
         </div>
 
         {/* Key Statistics Cards */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-black mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-[#7053bc] dark:text-purple-400 mb-6" data-aos="fade-up">
             Key Statistics
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -175,7 +187,7 @@ const Home = () => {
 
         {/* Charts Section */}
         <section className="mb-12">
-          <h2 className="text-xl md:text-2xl font-bold text-black mb-6" data-aos="fade-up">
+          <h2 className="text-xl md:text-2xl font-bold text-[#7053bc] dark:text-purple-400 mb-6" data-aos="fade-up">
             Overall Analysis
           </h2>
 
@@ -198,6 +210,7 @@ const Home = () => {
               title="Preferred Employment Location (Overall)"
               data={overallData.locationCounts}
               percentageData={overallData.locationPercentages}
+              showDetailsPanel={true}
             />
           </div>
 
@@ -205,13 +218,12 @@ const Home = () => {
           <div className="mb-8">
             <BarChart
               title="Overall Minimum Education Distribution"
-              data={overallData.educationPercentages}
+              data={overallData.educationCounts}
               xAxisLabel="Education Level"
-              yAxisLabel="Percentage (%)"
+              yAxisLabel="Number of Youth"
               color="govGreen"
               showPercentage={true}
               percentageData={overallData.educationPercentages}
-              numberData={overallData.educationCounts}
             />
           </div>
         </section>

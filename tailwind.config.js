@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -34,6 +35,19 @@ export default {
           700: '#005c33',
           800: '#003d22',
           900: '#001e11',
+        },
+        themePurple: {
+          DEFAULT: '#7053bc',
+          50: '#f0edf7',
+          100: '#d9d1eb',
+          200: '#c2b5df',
+          300: '#ab99d3',
+          400: '#947dc7',
+          500: '#7053bc',
+          600: '#5a4296',
+          700: '#443170',
+          800: '#2e204a',
+          900: '#181024',
         },
       },
     },

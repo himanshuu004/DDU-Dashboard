@@ -3,8 +3,8 @@ import { ChevronDown, MapPin } from 'lucide-react';
 const DistrictSelect = ({ districts, selectedDistrict, onDistrictChange }) => {
   return (
     <div data-aos="fade-down">
-      <label htmlFor="district-select" className="block text-sm font-semibold text-black mb-3 flex items-center gap-2">
-        <MapPin className="w-4 h-4 text-govBlue-600" />
+      <label htmlFor="district-select" className="block text-sm font-semibold text-black dark:text-gray-200 mb-3 flex items-center gap-2">
+        <MapPin className="w-4 h-4 text-govBlue-600 dark:text-purple-400" />
         Select District
       </label>
       <div className="relative">
@@ -12,7 +12,7 @@ const DistrictSelect = ({ districts, selectedDistrict, onDistrictChange }) => {
           id="district-select"
           value={selectedDistrict}
           onChange={(e) => onDistrictChange(e.target.value)}
-          className="w-full px-4 py-3 pr-12 border-2 border-govBlue-300 rounded-lg bg-white text-black font-medium focus:outline-none focus:ring-2 focus:ring-govBlue-500 focus:border-govBlue-500 appearance-none cursor-pointer transition-all duration-200 hover:border-govBlue-400 shadow-sm hover:shadow-md"
+          className="w-full px-4 py-3 pr-12 border-2 border-govBlue-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-govBlue-500 dark:focus:ring-purple-500 focus:border-govBlue-500 dark:focus:border-purple-500 appearance-none cursor-pointer transition-all duration-200 hover:border-govBlue-400 dark:hover:border-gray-500 shadow-sm hover:shadow-md"
         >
           {districts.map((district) => (
             <option key={district} value={district}>
@@ -21,11 +21,11 @@ const DistrictSelect = ({ districts, selectedDistrict, onDistrictChange }) => {
           ))}
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-          <ChevronDown className="w-5 h-5 text-govBlue-600" />
+          <ChevronDown className="w-5 h-5 text-govBlue-600 dark:text-purple-400" />
         </div>
       </div>
-      <p className="mt-2 text-xs text-black">
-        Currently viewing: <span className="font-semibold text-govBlue-700">{selectedDistrict}</span>
+      <p className="mt-2 text-xs text-black dark:text-gray-300">
+        Currently viewing: <span className="font-semibold text-govBlue-700 dark:text-purple-400">{selectedDistrict}</span>
       </p>
     </div>
   );

@@ -57,16 +57,16 @@ export const getEducationLevelPercentageData = (data) => {
   return result;
 };
 
-export const getVillageWiseData = (data) => {
-  const villageData = data.youth.villageWise;
+export const getBlockWiseData = (data) => {
+  const blockData = data.youth.blockWise;
   const top5 = {};
   
-  const sorted = Object.entries(villageData)
+  const sorted = Object.entries(blockData)
     .sort((a, b) => b[1].number - a[1].number)
     .slice(0, 5);
   
-  sorted.forEach(([village, stats]) => {
-    top5[village] = stats.number;
+  sorted.forEach(([block, stats]) => {
+    top5[block] = stats.number;
   });
   
   const totalFromTop5 = sorted.reduce((sum, [, stats]) => sum + stats.number, 0);
@@ -79,15 +79,15 @@ export const getVillageWiseData = (data) => {
   return top5;
 };
 
-export const getVillageWisePercentageData = (data) => {
-  const villageData = data.youth.villageWise;
+export const getBlockWisePercentageData = (data) => {
+  const blockData = data.youth.blockWise;
   const result = {};
-  const sorted = Object.entries(villageData)
+  const sorted = Object.entries(blockData)
     .sort((a, b) => b[1].number - a[1].number)
     .slice(0, 5);
   
-  sorted.forEach(([village, stats]) => {
-    result[village] = stats.percentage;
+  sorted.forEach(([block, stats]) => {
+    result[block] = stats.percentage;
   });
   
   const totalFromTop5 = sorted.reduce((sum, [, stats]) => sum + stats.number, 0);

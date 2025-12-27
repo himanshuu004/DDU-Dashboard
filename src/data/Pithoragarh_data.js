@@ -1,47 +1,51 @@
-// Static data for Pithoragarh district (Dummy values - to be updated)
+// Static data for Pithoragarh district
 export const districtData = {
   youth: {
-    totalRegisteredYouth: 90, // Dummy value
+    totalRegisteredYouth: 208,
     educationLevel: {
-      '12th': { number: 32, percentage: 35.56 },
-      'UG': { number: 25, percentage: 27.78 },
-      'PG': { number: 20, percentage: 22.22 },
-      '10th': { number: 9, percentage: 10.00 },
-      '11th': { number: 3, percentage: 3.33 },
-      'Up to 8th': { number: 1, percentage: 1.11 }
+      '12th': { number: Math.round(208 * 0.4615), percentage: 46.15 },
+      'UG': { number: Math.round(208 * 0.2019), percentage: 20.19 },
+      '10th': { number: Math.round(208 * 0.2019), percentage: 20.19 },
+      'PG': { number: Math.round(208 * 0.0962), percentage: 9.62 },
+      '11th': { number: Math.round(208 * 0.0240), percentage: 2.40 },
+      'Up to 8th': { number: Math.round(208 * 0.0096), percentage: 0.96 },
+      '9th': { number: Math.round(208 * 0.0048), percentage: 0.48 }
     },
-    villageWise: {
-      'Village A': { number: 17, percentage: 18.89 },
-      'Village B': { number: 14, percentage: 15.56 },
-      'Village C': { number: 12, percentage: 13.33 },
-      'Village D': { number: 10, percentage: 11.11 },
-      'Village E': { number: 8, percentage: 8.89 }
+    blockWise: {
+      'Bin': { number: Math.round(208 * 0.3942), percentage: 39.42 },
+      'Munsiyari': { number: Math.round(208 * (0.1346 + 0.1346)), percentage: 26.92 },
+      'Kanalichina': { number: Math.round(208 * 0.1298), percentage: 12.98 },
+      'Dharchula': { number: Math.round(208 * 0.0769), percentage: 7.69 },
+      'Didihat': { number: Math.round(208 * 0.0721), percentage: 7.21 },
+      'Pithoragarh': { number: Math.round(208 * 0.0337), percentage: 3.37 },
+      'Berinag': { number: Math.round(208 * 0.0144), percentage: 1.44 },
+      'Gangolihat': { number: Math.round(208 * 0.0096), percentage: 0.96 }
     },
     preferredJobSector: {
-      'Government Jobs': { number: 40, percentage: 44.44 },
-      'Tourism': { number: 23, percentage: 25.56 },
-      'Agriculture': { number: 16, percentage: 17.78 },
-      'Education': { number: 8, percentage: 8.89 },
-      'Healthcare': { number: 3, percentage: 3.33 }
+      'Apparel': { number: 62, percentage: 30.00 },
+      'Beauty & Wellness': { number: 29, percentage: 14.00 },
+      'Healthcare': { number: 25, percentage: 12.00 },
+      'Agriculture': { number: 15, percentage: 7.00 }
     },
     preferredEmploymentLocation: {
-      'Within Domicile District': { number: 54, percentage: 60.00 },
-      'Within Domicile State': { number: 32, percentage: 35.56 },
-      'Outside State': { number: 4, percentage: 4.44 }
+      'Within Domicile District': { number: Math.round(208 * 0.3990), percentage: 39.90 },
+      'Within Domicile State': { number: Math.round(208 * 0.3654), percentage: 36.54 },
+      'Outside State': { number: Math.round(208 * 0.1394), percentage: 13.94 },
+      'Outside Country': { number: Math.round(208 * 0.0962), percentage: 9.62 }
     }
   },
   employer: {
-    totalEmployerOrganizations: 70, // Dummy value
-    expectedNewJobs: 110, // Dummy value
+    totalEmployerOrganizations: 80,
+    expectedNewJobs: 100,
     sectorDistribution: {
-      'Tourism': { number: 22, percentage: 31.43 },
-      'Agriculture': { number: 18, percentage: 25.71 },
-      'Education': { number: 14, percentage: 20.00 },
-      'Retail': { number: 10, percentage: 14.29 },
-      'Healthcare': { number: 4, percentage: 5.71 },
-      'Government': { number: 2, percentage: 2.86 }
+      'Tourism': { number: 20, percentage: 25.00 },
+      'Agriculture': { number: 16, percentage: 20.00 },
+      'Healthcare': { number: 12, percentage: 15.00 },
+      'Retail': { number: 10, percentage: 12.50 },
+      'Education': { number: 8, percentage: 10.00 },
+      'Manufacturing': { number: 6, percentage: 7.50 },
+      'Government': { number: 4, percentage: 5.00 },
+      'IT': { number: 4, percentage: 5.00 }
     }
   }
 };
-
-
